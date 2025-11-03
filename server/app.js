@@ -21,6 +21,10 @@ app.get("/api/getPosts", (req, res) => {
   const { posts, totalPages } = getPaginatedPosts(page, limit)
   res.json({ posts, totalPages })
 })
+app.use("/api/test",(req,res)=>
+  {
+    res.json({mess:"up and running"});
+    })
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
