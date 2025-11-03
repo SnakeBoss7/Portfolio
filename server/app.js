@@ -3,13 +3,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const {getPaginatedPosts} = require('./utils/getPosts');
 dotenv.config();
-if(process.env.NODE_ENV === 'dev') {
-    FrontEnd_URL = process.env.DEV_CLIENT_URL;
-}
-else
-  {
-    FrontEnd_URL = process.env.CLIENT_URL;
-  }
 const app = express();
 const PORT = process.env.PORT || 5000;
 
