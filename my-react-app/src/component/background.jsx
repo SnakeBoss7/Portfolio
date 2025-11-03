@@ -1,6 +1,6 @@
 const Backgroundgradient = () => {
   return (
-    <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_1050px_at_50%_200px,#1a1a1a,transparent)] pointer-events-none">
+    <div className="min-h-screen fixed inset-0 -z-10 bg-[radial-gradient(circle_1050px_at_50%_200px,#1a1a1a,transparent)] pointer-events-none">
       {/* Mobile - thinner, more subtle lines */}
       <div className="absolute inset-0 -z-10 h-full w-full bg-black md:hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_0.5px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_0.5px,transparent_1px)] bg-[size:4.5rem_3.5rem]">
         {/* Fade mask - lines visible on left, fade to right */}
