@@ -1,1 +1,13 @@
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# environment files
 .env
+*.log
+
+# system or build output
+node_modules/
+dist/
+build/
