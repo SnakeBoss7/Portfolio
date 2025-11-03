@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const path = require("path");
+const fs = require("fs");
 const dotenv = require('dotenv');
-const {getPaginatedPosts} = require('./utils/getPosts');
+const {getPaginatedPosts, getPostBySlug} = require('./utils/getPosts');
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +23,18 @@ app.get("/api/getPosts", (req, res) => {
   const { posts, totalPages } = getPaginatedPosts(page, limit)
   res.json({ posts, totalPages })
 })
+
+// in server/server.js
+
+
+app.get("/api/post/:slug", (req, res) => {
+  const slug = req.params.slug;
+  let data=getPostBySlug(slug);
+  console.log({data})
+  res.json({ data});
+});
+
+
 app.use("/api/test",(req,res)=>
   {
     res.json({mess:"up and running"});

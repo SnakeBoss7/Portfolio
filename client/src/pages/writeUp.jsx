@@ -256,7 +256,7 @@ export default function Writeups() {
                     onClick={() => handlePageClick(pageNum)}
                     className={`min-w-[32px] h-8 px-2 rounded text-sm font-medium transition-all ${
                       page === pageNum
-                        ? "bg-primary text-white"
+                        ? "bg-primary text-black"
                         : "text-gray-300 hover:bg-secondary_lg hover:text-primary"
                     }`}
                   >
