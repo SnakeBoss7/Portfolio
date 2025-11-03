@@ -1,0 +1,38 @@
+.prose {
+  color: #d1d5db;
+  line-height: 1.7;
+  font-family: 'Inter', sans-serif;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  font-weight: 700;
+  color: #fff;
+}
+
+.prose pre {
+  background-color: #0d1117;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.prose th, .prose td {
+  border: 1px solid #2a2a2a;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.prose th {
+  background-color: #1f2937;
+  font-weight: 600;
+}
+
+.prose tr:nth-child(even) {
+  background-color: #111827;
+}
