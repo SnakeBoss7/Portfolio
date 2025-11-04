@@ -1,7 +1,7 @@
 ---
 title: Snort Room — IDS/IPS 
 author: INSAEN
-date: 2025-11-02  
+date: 2025-12-02  
 tags: [SOC, Snort, IDS,IPS,Packet Analysis, TryHackMe]  
 duration: 1 hour 25 minutes  e
 ---
@@ -49,12 +49,14 @@ This report documents the investigation of the **Snort Room** challenge on TryHa
  snort -r snort.log.* -n 8 
 ```
 ### Results:
-- Alerts generated: 170
-- TCP Segments Queued: 18
+- id of 10th packet: 49313
+- referer of the 4th packet: https:www.//ethereal.com
 - HTTP Response Headers Extracted: 3
 
 ## 📸 Screenshots
-![Snort Output](https://res.cloudinary.com/demo/image/upload/v12345/snort_output.png)
+![Snort Output](https://res.cloudinary.com/dnlea05ys/image/upload/v1762219060/snort_1_m7ty5o.png)
+![Snort Output](https://res.cloudinary.com/dnlea05ys/image/upload/v1762219063/snort_2_vkusuk.png)
+![Snort Output](https://res.cloudinary.com/dnlea05ys/image/upload/v1762219061/snort_4_mgwhj0.png)
 
 ---
 ## Task 2
@@ -77,7 +79,10 @@ This report documents the investigation of the **Snort Room** challenge on TryHa
 - combined alerts
 
 ## 📸 Screenshots
-![Snort Output](https://res.cloudinary.com/demo/image/upload/v12345/snort_output.png)
+![Snort Output](https://res.cloudinary.com/dnlea05ys/image/upload/v1762219062/snort_5_hp1a7h.png)
+![Snort Output]()
+![Snort Output](https://res.cloudinary.com/dnlea05ys/image/upload/v1762219061/snort_6_bpbkzd.png)
+
 
 ---
 ## Task 3
@@ -88,6 +93,7 @@ This report documents the investigation of the **Snort Room** challenge on TryHa
 - Create a rule to filter UDP packets with the same source and destination IP
 
 ## syntax
+![snort rules creation params](https://res.cloudinary.com/dnlea05ys/image/upload/v1762219651/9f7624fafc763e0c7c4e3bd70451367b_ygj9mr.png)
 ### Commands Used
 ```snort
  alert IP any <> any any (msg:"ip 35369 matched";id:`35369`;rev:1;sid:100001)
@@ -95,10 +101,6 @@ This report documents the investigation of the **Snort Room** challenge on TryHa
  alert TCP any <> any any (msg:"PUSH-ACK found";flag:`PA`;rev:1;sid:100003)
  alert UDP any <> any any (msg:"Same destination and source IP";`sameip`;rev:1;sid:100003)
 ```
-
-## 📸 Screenshots
-![Snort Output](https://res.cloudinary.com/demo/image/upload/v12345/snort_output.png)
-
 ---
 
 
