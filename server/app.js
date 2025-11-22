@@ -34,6 +34,17 @@ app.get("/api/post/:slug", (req, res) => {
   res.json({ data});
 });
 
+const { getProjectBySlug } = require('./utils/getProjects');
+
+app.get("/api/project/:slug", (req, res) => {
+  const slug = req.params.slug;
+  const data = getProjectBySlug(slug);
+  if (!data) {
+    return res.status(404).json({ error: "Project not found" });
+  }
+  res.json({ data });
+});
+
 
 app.use("/api/test",(req,res)=>
   {

@@ -5,13 +5,15 @@ import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 import { Buffer } from "buffer"
 import "../../styles/markdown.css"
-import { MoveLeftIcon } from "lucide-react"
+import { MoveLeftIcon, FileText } from "lucide-react"
+import TerminalWindow from "../TerminalWindow"
+import GlitchText from "../GlitchText"
 window.Buffer = Buffer
 
-const apiUrl = import.meta.env.VITE_API_URL
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000"
 
 export default function SingleWriteup() {
-  const { slug } = useParams()   // ✅ Correct param extraction
+  const { slug } = useParams()
   const [markdown, setMarkdown] = useState(null)
 
   useEffect(() => {
@@ -27,30 +29,52 @@ export default function SingleWriteup() {
     }
     fetchMarkdown()
   }, [slug])
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   },[])
 
+  if (!markdown) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-primary font-mono">
+        <span className="animate-pulse">{">"} LOADING_LOG_ENTRY...</span>
+      </div>
+    )
+  }
+
   return (
-    <div className="bg-foreground pt-20">
-      <div className="min-h-screen lg:mx-[200px] bg-foreground text-gray-200 px-6 prose prose-invert max-w-none">
+    <div className="min-h-screen py-12 px-4">
+      <div className="max-w-5xl mx-auto">
         <Link
-          className="text-primary flex gap-3 py-6 items-center text-sm hover:gap-5 transition-all ease-in-out duration-300 underline-none"
+          className="inline-flex items-center gap-2 text-gray-500 hover:text-primary mb-6 font-mono text-sm transition-colors"
           to={"/writeUps"}
         >
-          <MoveLeftIcon size={15}/> Back to writeups
+          <MoveLeftIcon size={16}/> [ RETURN_TO_LOGS ]
         </Link>
 
-        <h1 className="text-cyan-400 text-3xl font-bold mb-2">{markdown?.title}</h1>
-        <p className="text-gray-400 mb-4">
-          By {markdown?.author} • {markdown?.duration} •{" "}
-          {markdown?.date && new Date(markdown.date).toDateString()}
-        </p>
+        <TerminalWindow title={`root@cybers3c:~/writeups/${slug}`}>
+          <div className="border-b border-gray-800 pb-6 mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <FileText className="text-primary" size={20} />
+              <h1 className="text-2xl md:text-3xl font-bold text-white font-mono">
+                <GlitchText text={markdown.title} />
+              </h1>
+            </div>
+            <div className="flex items-center gap-4 text-sm text-gray-500 font-mono pl-8">
+              <span>AUTHOR: {markdown.author}</span>
+              <span>|</span>
+              <span>TIME: {markdown.duration}</span>
+              <span>|</span>
+              <span>DATE: {markdown.date && new Date(markdown.date).toLocaleDateString()}</span>
+            </div>
+          </div>
 
-        {/* ✅ Only render the content string */}
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-          {markdown?.content || ""}
-        </ReactMarkdown>
+          <div className="markdown-content prose prose-invert prose-pre:bg-[#111] prose-pre:border prose-pre:border-gray-800 max-w-none font-mono">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+              {markdown.content || ""}
+            </ReactMarkdown>
+          </div>
+        </TerminalWindow>
       </div>
     </div>
   )
